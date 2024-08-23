@@ -2,15 +2,9 @@ from numpy import e, square, pi, sqrt
 from data import test_datas, test_value_name, test_result_name
 import random
 from scipy.stats import norm
-from simulator import Simulator
 from solution import Solution
+from params import parameters, simulator, solution_archive_size, solution_archive, q_value
 
-## simulation 
-parameters = {"a":(1, 5), "b":(1, 10)}
-solution_archive_size = 5 * len(parameters)
-algorithm_q  = 0.5
-solution_archive = []
-simulator = Simulator()
 
 def initialize_simulation():
     for i in range(solution_archive_size):
@@ -37,9 +31,9 @@ def calculate_weight(rank):
 
 def print_solution_archive():
     for solution in solution_archive:
-        print(solution.variables, solution.weight, solution.pheromone)
+        print(solution.variables, '**', solution.weight, '**',solution.pheromone)
 def get_weight(i):
-    a = (1/(algorithm_q*solution_archive_size*sqrt(2*pi)))*(e**(-(square(i-1)/(2*square(algorithm_q*solution_archive_size)))))
+    a = (1/(q_value*solution_archive_size*sqrt(2*pi)))*(e**(-(square(i-1)/(2*square(q_value*solution_archive_size)))))
     return a
 
 initialize_simulation()
