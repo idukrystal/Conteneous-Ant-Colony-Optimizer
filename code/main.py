@@ -1,8 +1,10 @@
+import random
 
 class Simulator:
-    def __init__(self, archive_size):
-
-    def simulate_test(solution):
+    def __init__(self):
+        pass
+    
+    def simulate_test(self, solution):
         pass
 
 
@@ -14,7 +16,7 @@ class Solution:
 
 
 ## simulation 
-parameters = {a:(0, 5), b:(2, 6), c:(3, 10)}
+parameters = {"a":(1, 5), "b":(1, 10)}
 solution_archive_size = 5 * len(parameters)
 algorithm_q  = 0.5
 solution_archive = []
@@ -23,24 +25,32 @@ simulator = Simulator()
 def initialize_simulation():
     for i in range(solution_archive_size):
         solution = Solution()
-        for parameter in parameter:
-            solution.variables(parameter) = 5#random(Solution.parameters(parameter)
+        for parameter in parameters:
+            solution.variables[parameter] = random.uniform(*parameters[parameter])
         test_result = simulator.simulate_test(solution)
-        solution.pheromone = calculte_pheromone(test_result)
+        solution.pheromone = calculate_pheromone(test_result)
         solution_archive.append(solution)
         modify_weights()
 
 
 def calculate_pheromone(result):
-    pass
+    return random.random() #implement
 
 def modify_weights():
     reorder_solutions()
     for i in range(len(solution_archive)):
-        solution_archive(i).weight = calculate_weight(i)
+        solution_archive[i].weight = calculate_weight(i)
 
 def reorder_solutions():
     pass
 
-def calculate_weights(rank):
-    pass
+def calculate_weight(rank):
+    return random.random() #implement 
+
+
+def print_solution_archive():
+    for solution in solution_archive:
+        print(solution.variables, solution.weight, solution.pheromone)
+
+initialize_simulation()
+print_solution_archive()
