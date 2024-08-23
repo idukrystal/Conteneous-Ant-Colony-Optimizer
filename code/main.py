@@ -13,7 +13,16 @@ class Solution:
         self.variables = {}
         self.weight = 0
         self.pheromone = 0
-
+    def __lt__(self, other):
+        return self.pheromone < other.pheromone
+    def __le__(self, other):
+        return self.pheromone <= other.pheromone
+    def __gt__(self, other):
+        return self.pheromone > other.pheromome
+    def __ge__(self, other):
+        return self.pheromone >= other.pheromone
+    def __ne__(self, other):
+        return self.pheromone != other.pheromone
 
 ## simulation 
 parameters = {"a":(1, 5), "b":(1, 10)}
@@ -37,12 +46,12 @@ def calculate_pheromone(result):
     return random.random() #implement
 
 def modify_weights():
-    reorder_solutions()
+    reorder_solution_archive()
     for i in range(len(solution_archive)):
         solution_archive[i].weight = calculate_weight(i)
 
-def reorder_solutions():
-    pass
+def reorder_solution_archive():
+    solution_archive.sort(reverse=True)
 
 def calculate_weight(rank):
     return random.random() #implement 
