@@ -1,5 +1,6 @@
 """ Module to handle various type of simulations """
 
+import random
 
 class Simulator:
     """ Generic Simulation Object """
@@ -10,4 +11,4 @@ class Simulator:
 
     def simulate_test(self, solution):
         """" Runs the simulation """
-        return 400 #implement
+        return random.uniform(300, 400) #implement
