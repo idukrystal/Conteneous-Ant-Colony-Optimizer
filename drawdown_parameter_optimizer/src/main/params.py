@@ -1,18 +1,20 @@
 """ Algorithm parameters. """
 
+# Test model parameters.
+from src.main.data import parameters
 
-from .simulators import Simulator
-
-# Model parameters to optimize: thier range .
-parameters = {"a":(10, 100), "b":(201, 400)}
-
-# No of discovered solutions to s.tore fore ACOR algorithm
+# No of discovered solutions to store fore ACOR algorithm
 solution_archive_size = 10  * len(parameters)
 
-# Inversely affects convergence speed etc.
-q_value  = 0.5
+# When q is small, the best-ranked solutions are strongly preferred.
+# When it is large, the probability becomes more uniform.
+q_value  = 2
 
-e_value = 0.5
+# Must be greater than 0.
+# Inversely affects convergence speed.
+# influences the way the long term memory is used.
+# >e: less biased towards the points of the search space already explored.
+e_value = 0.7
 
-# no times to iteration
-no_of_iterations = 10
+# No of times to run algorithm.
+no_of_iterations = 20000

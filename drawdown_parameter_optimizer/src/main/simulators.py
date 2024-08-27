@@ -11,4 +11,4 @@ class Simulator:
 
     def simulate_test(self, solution):
         """" Runs the simulation """
-        return random.uniform(300, 400) #implement
+        return solution.variables["a"]*solution.variables["b"]*solution.test_data["time"]#implement
