@@ -1,0 +1,12 @@
+""" Algorithm parameters. """
+
+
+from .simulators import Simulator
+
+# Model parameters to optimize: thier range .
+parameters = {"a":(1, 5), "b":(1, 10)}
+
+# No of discovered solutions to s.tore fore ACOR algorithm
+solution_archive_size = 10  * len(parameters)
+
+# Inversely affects convergence speed e

@@ -1,0 +1,25 @@
+from src.main.simulation_helper import SimulationHelper
+
+import unittest
+
+loader = unittest.TestLoader()
+suite = loader.discover(
+    start_dir=".",
+    top_level_dir="/path/to/your/package"
+)
+
+test_rank = 5
+
+class TestSimulationHelper(unittest.TestCase):
+    def setUp(self):
+        self.simulation_helper = SimulationHelper()
+        
+    def test_get_weight(self):
+        weight1 = self.getweight(test_rank)
+        weight2 = scipy.norm.pdf(test_rank, loc=1, scale=archive_size*q_value)
+        self.assertEqual(weight1, weight2)
+        
+
+
+if __name__ == "__main__":
+    unittest.main()
