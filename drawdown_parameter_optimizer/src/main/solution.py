@@ -6,7 +6,9 @@ import random
 from src.main.params import parameters
 
 # Name of test's dependent variable(i.e pressure)
-from src.main.data  import test_result_name
+from src.main.data  import test_result_name, test_datas
+
+test_data_size = len(test_datas)
 
 class Solution:
     """ Represents a single possible solution. """
@@ -16,6 +18,8 @@ class Solution:
         
         # Variables:values used to generate solution.
         self.variables = {}
+
+        self.deviation = 0
 
         # Initialize variables based on specified parameters.
         for parameter in parameters:
@@ -42,23 +46,31 @@ class Solution:
         # Calculates  pheromone.
         self.pheromone = 100 - error
 
+    def set_deviation(self, simulator):
+        deviation_sum = 0
+        for test_data in test_datas:
+            pwf = simulator.simulate_test(self, test_data)
+            deviation_sum += abs(pwf - test_data[test_result_name])
+        self.deviation = deviation_sum/test_data_size
+
     # Comparisson functions.
     def __lt__(self, other):
         """ check if less than another solution """
-        return self.pheromone < other.pheromone
+        return self.deviation  > other.deviation
     
     def __le__(self, other):
         """ check if less than or equals another solution """
-        return self.pheromone <= other.pheromone
+        return self.deviation >= other.deviation
     
     def __gt__(self, other):
         """ check if greater than another solution """
-        return self.pheromone > other.pheromome
+        return self.deviation < other.deviation
     
     def __ge__(self, other):
         """ check if greater than or equals  another solution """
-        return self.pheromone >= other.pheromone
+        return self.deviation <= other.deviation
     
     def __ne__(self, other):
         """ check if not equal to another solution """
-        return self.pheromone != other.pheromone
+        return self.deviation != other.deviation
+
