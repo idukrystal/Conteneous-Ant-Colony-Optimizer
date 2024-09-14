@@ -20,31 +20,30 @@ class Simulator:
 class DrawdownTestSimulator(Simulator):
     
 
-    parameters = ["p_i", "q", "β", "h", "ø", "c_t", "∪", "r_w"] 
-    def __init__(self, dataset):
-        for parameter in self.parameters:
-            if parameter not in dataset:
-                exit(f"{parameter} not found")
-        self.dataset = dataset
-    def simulate_test(self, solution, test_data = None):
-        test_data = solution.test_data if test_data == None else test_data
+    property_names = ["p_i", "q", "β", "h", "ø", "c_t", "∪", "r_w"] 
+    def __init__(self, properties):
+        for property_name in self.property_names:
+            if property_name not in properties:
+                exit(f"{property_name} not found")
+        self.properties = properties
+    def simulate_test(self, solution, test_data):
         return get_pwf(
-            self.dataset,
+            self.properties,
             test_data["time"],
-            solution.variables["s"],
-            solution.variables["k"]
+            solution.parameters["s"],
+            solution.parameters["k"]
         )
 
 
-def get_pwf(dataset, t, s, k):
-    p_i  = dataset["p_i"]
-    q = dataset["q"]
-    β = dataset["β"]
-    U = dataset["∪"]
-    h = dataset["h"]
-    ø = dataset["ø"]
-    c_t= dataset["c_t"]
-    r_w = dataset["r_w"]
+def get_pwf(properties, t, s, k):
+    p_i  = properties["p_i"]
+    q = properties["q"]
+    β = properties["β"]
+    U = properties["∪"]
+    h = properties["h"]
+    ø = properties["ø"]
+    c_t= properties["c_t"]
+    r_w = properties["r_w"]
     log_a = log(k/(ø*U*c_t*(r_w**2)))
     pwf = p_i - (162.6*((q*β*U)/(k*h))*(log(t)+log_a+(0.8686*s)-3.2274))
     return pwf

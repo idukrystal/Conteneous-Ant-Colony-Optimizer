@@ -1,11 +1,10 @@
 """ Algorithm parameters. """
 
-# Test model parameters.
-from src.main.data import parameters, dataset
+from src.main.data import properties
 from src.main.simulators import DrawdownTestSimulator
 
 # No of discovered solutions to store fore ACOR algorithm
-solution_archive_size = 20  * len(parameters)
+solution_archive_size = 400
 
 # When q is small, the best-ranked solutions are strongly preferred.
 # When it is large, the probability becomes more uniform.
@@ -20,4 +19,4 @@ e_value = 1.5
 # No of times to run algorithm.
 no_of_iterations = 5000
 
-simulator = DrawdownTestSimulator(dataset)
+simulator = DrawdownTestSimulator(properties)

@@ -1,21 +1,19 @@
 """ Stores and handles data from real world tests"""
 
-# a*b*t = p
 
 # Model parameters and thier expected range of values
 parameters = {"s":(-50, 50), "k":(0.001, 1000)}
 
 # Name of Independent Variable
-test_value_name  = "time"
+independent_test_variable = "time"
 
 # Name of Dependent Variable
-test_result_name = "pressure"
+dependent_test_variable = "pressure"
 
-# Real World Test Data
+# Reservoir and Well properties
 
-"""
-dataset = {
-    "p_i" : 6009,
+properties = {
+    "p_i" : 5869,
     "q" : 2500,
     "β" : 1.21,
     "h" : 23,
@@ -24,9 +22,9 @@ dataset = {
     "∪" : 0.92,
     "r_w" : 0.401
 }
-"""
 
-dataset = {
+""""
+properties  = {
     "p_i" : 5200,
     "q" : 2000,
     "β" : 1.5,
@@ -36,9 +34,10 @@ dataset = {
     "∪" : 0.3,
     "r_w" : 0.4
 }
+"""
 
-
-"""test_datas = [
+# Real World Test Data
+test_data = [
     {"pressure": 3361.60, "time": 1.34230},
     {"pressure": 3318.80, "time": 1.55366},
     {"pressure": 3289.38, "time": 1.79829},
@@ -59,20 +58,6 @@ dataset = {
     {"pressure": 3018.23, "time": 16.1223},
     {"pressure": 3002.85, "time": 18.6608},
     {"pressure": 2988.93, "time": 21.6000}
-]"""
-
-"""
-test_datas = [
-    {"pressure": 2989.39, "time": 21.6000},
-    {"pressure": 3156.31, "time": 21.6200},
-    {"pressure": 3384.61, "time": 21.6500},
-    {"pressure": 3715.46, "time": 21.7000},
-    {"pressure": 3994.55, "time": 21.7500},
-    {"pressure": 4431.29, "time": 21.8500},
-    {"pressure": 4740.80, "time": 21.9477},
-    {"pressure": 5068.25, "time": 22.1000},
-    {"pressure": 5273.46, "time": 22.2500},
-    {"pressure": 5461.40, "time": 22.4798}
 ]
 """
 
@@ -97,4 +82,6 @@ test_data = [
     {"pressure": 4734.54, "time": 22.9087},
     {"pressure": 4715.66, "time": 27.5423},
     {"pressure": 4696.68, "time": 33.1131}
-]
+]"""
+
+test_data_size = len(test_data)

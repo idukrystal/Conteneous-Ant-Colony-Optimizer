@@ -5,13 +5,13 @@ test data and running of algorithm
 
 
 from numpy import e, square, pi, sqrt
-from src.main.data import test_datas, test_value_name, test_result_name, dataset
+from src.main.data import parameters, test_data
 import random
 from scipy.stats import norm
 from src.main.solution import Solution
-from src.main.params import solution_archive_size, q_value, parameters, e_value, simulator
+from src.main.params import solution_archive_size, q_value, e_value, simulator
 
-test_data_size = len(test_datas)
+test_data_size = len(test_data)
 
 class SimulationHelper:
     """ Helps run a the simulation: useful functions and variables """
@@ -25,29 +25,24 @@ class SimulationHelper:
         # Simulates test and returs sim data
         self.simulator = simulator
 
-        self.test_datas_size = len(test_datas)
-    def initialize_simulation(self):
+        self.test_data_size = len(test_data)
+    def fill_solution_archive_randomly(self):
         """ Populates the solution archive with random solutions. """
         for i in range(solution_archive_size):
             solution = Solution()
 
             # Random test data to compare sim data to.
-            solution.test_data  = random.choice(test_datas)
+            data_point  = random.choice(test_data)
 
-            # Random value for each model parameter thats a solution.
-            for variable in solution.variables:
-                solution.variables[variable] = random.uniform(
-                    *parameters[variable]
+            # Random value for each model parameter
+            for parameter in parameters:
+                solution.parameters[parameter] = random.uniform(
+                    *parameters[parameter]
                 )
 
-            # Simulate a test result.
-            #sim_result = self.simulator.simulate_test(solution)
-
-            # Update solutions pheromone level.
-            #solution.update_pheromone(sim_result)
-
             solution.set_deviation(self.simulator)
-            # Add to solutipn archive.
+            
+            # Add to solution archive.
             self.solution_archive.append(solution)
 
         # Adjust solution weights to reflect newly added solutions.
@@ -65,22 +60,21 @@ class SimulationHelper:
             solution = self.solution_archive[i]
             solution.weight = get_weight(i)
 
-    def __reorder_solution_archive(self, orderBy = None):
+    def __reorder_solution_archive(self):
         """ Rearranges solutioms in archive in decending
         amount of pheromone """
-        self.solution_archive.sort(key=orderBy, reverse=True)
+        self.solution_archive.sort(reverse=True)
 
     def print_solution_archive(self):
         """ Prints out the solution archive in a human readable way. """
         for solution in self.solution_archive:
             print(
-                solution.variables, '**',
+                solution.parameters, '**',
                 solution.weight, '**',
-                solution.pheromone, '**',
                 solution.deviation
             )
 
-    def update_solution_archive(self, new_solution):
+    def update_archive(self, new_solution):
         """
         Adds new_solution to archive if its better than any
         of the current ones then  removes the worst solution
@@ -95,7 +89,7 @@ class SimulationHelper:
                 return True
         return False
     
-    def calculate_sd(self, solution):
+    def calculate_deviations(self, solution):
         """
         Generates a list of  standard deviations: one for each
         variable in [solution] based on distance from corresponding
@@ -103,11 +97,11 @@ class SimulationHelper:
         Returns: computed list of standard deviations
         """
         sd = {}
-        for variable in solution.variables:
-            sd[variable] = calculate_sd(
-                solution.variables[variable],
+        for parameter in solution.parameters:
+            sd[parameter] = calculate_sd(
+                solution.parameters[parameter],
                 [
-                    value.variables[variable] for value in self.solution_archive
+                    value.parameters[parameter] for value in self.solution_archive
                 ]
             )
         return sd
