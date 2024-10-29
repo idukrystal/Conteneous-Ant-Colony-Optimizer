@@ -41,7 +41,7 @@ for i in range(no_of_iterations):
 
         # Chosen solution's variables  deviation from other solution's variables
         standard_deviations  = simulation_helper.calculate_deviations(solution)
-
+        
         # Uses a normal distribution about solution's varriable
         # to generate  varriables in new solution
         new_solution = ant.find_solution(solution, standard_deviations)

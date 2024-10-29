@@ -2,7 +2,9 @@
 
 
 # Model parameters and thier expected range of values
-parameters = {"s":(-50, 50), "k":(0.001, 1000)}
+parameters = {"c":(0, 1)}
+#parameters = {"s":(-50, 50), "k":(0.001, 1000)}
+#parameters = {"A": (1000, 10000000)}
 
 # Name of Independent Variable
 independent_test_variable = "time"
@@ -13,7 +15,8 @@ dependent_test_variable = "pressure"
 # Reservoir and Well properties
 
 properties = {
-    "p_i" : 5869,
+    "p_i" : 5867.82,
+    "t_i": 0.0167,
     "q" : 2500,
     "β" : 1.21,
     "h" : 23,
@@ -37,6 +40,7 @@ properties  = {
 """
 
 # Real World Test Data
+"""
 test_data = [
     {"pressure": 3361.60, "time": 1.34230},
     {"pressure": 3318.80, "time": 1.55366},
@@ -60,7 +64,7 @@ test_data = [
     {"pressure": 2988.93, "time": 21.6000}
 ]
 """
-
+"""
 test_data = [
     {"pressure": 5010.74, "time": 1.00000},
     {"pressure": 4998.50, "time": 1.20226},
@@ -84,4 +88,46 @@ test_data = [
     {"pressure": 4696.68, "time": 33.1131}
 ]"""
 
+test_data = [
+        {'pressure': 6009.00, 'time': 0.0},
+        {'pressure': 5867.82, 'time': 0.0167},
+        {'pressure': 5845.93, 'time': 0.01933},
+        {'pressure': 5819.44, 'time': 0.02237},
+        {'pressure': 5792.50, 'time': 0.0259},
+        {'pressure': 5765.01, 'time': 0.02997},
+        {'pressure': 5720.90, 'time': 0.03469},
+        {'pressure': 5688.36, 'time': 0.04016},
+        {'pressure': 5642.92, 'time': 0.04648},
+        {'pressure': 5587.43, 'time': 0.0538},
+        {'pressure': 5521.66, 'time': 0.06227},
+        {'pressure': 5459.70, 'time': 0.07207},
+        {'pressure': 5389.75, 'time': 0.08342},
+        {'pressure': 5306.48, 'time': 0.09655},
+        {'pressure': 5211.11, 'time': 0.11176},
+        {'pressure': 5117.79, 'time': 0.12935},
+        {'pressure': 5009.74, 'time': 0.14972},
+        {'pressure': 4886.13, 'time': 0.1733},
+        {'pressure': 4769.13, 'time': 0.20058},
+        {'pressure': 4635.16, 'time': 0.23217},
+        {'pressure': 4501.08, 'time': 0.26872},
+        {'pressure': 4365.85, 'time': 0.31103}
+    ]
+"""
+test_data = [
+        {"time": 24.25, "pressure": 2939.3},
+        {"time": 26.37, "pressure": 2921.5},
+        {"time": 28.67, "pressure": 2902.3},
+        {"time": 31.17, "pressure": 2881.4},
+        {"time": 33.90, "pressure": 2858.7},
+        {"time": 36.86, "pressure": 2834.0},
+        {"time": 40.07, "pressure": 2807.2},
+        {"time": 43.57, "pressure": 2778.0},
+        {"time": 47.38, "pressure": 2746.2},
+        {"time": 51.51, "pressure": 2711.7},
+        {"time": 56.01, "pressure": 2674.2},
+        {"time": 60.90, "pressure": 2633.4},
+        {"time": 72.00, "pressure": 2540.7},
+]
+
+"""
 test_data_size = len(test_data)
