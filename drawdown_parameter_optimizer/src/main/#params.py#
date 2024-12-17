@@ -25,4 +25,4 @@ simulator = WellboreStorageSimulator(properties)
 #simulator = PseudoSteadyBoundarySimulator(properties)
 
 # Data File
-data_file = 
+data_file = "well_1_drawdown"

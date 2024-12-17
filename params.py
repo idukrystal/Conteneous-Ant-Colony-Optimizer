@@ -17,12 +17,9 @@ q_value  = 0.1
 e_value = 0.5
 
 # No of times to run algorithm.
-no_of_iterations = 1000
+no_of_iterations = 2000
 
-#simulator = InfiniteActingRadialSimulator(properties)
-simulator = WellboreStorageSimulator(properties)
+simulator = InfiniteActingRadialSimulator(properties)
+#simulator = WellboreStorageSimulator(properties)
 #simulator = DrawdownTestSimulator(properties)
 #simulator = PseudoSteadyBoundarySimulator(properties)
-
-# Data File
-data_file = 

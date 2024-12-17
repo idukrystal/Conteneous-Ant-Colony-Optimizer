@@ -25,12 +25,10 @@ class Solution:
         """ Calculate solution's simulation's deviation from test data """
         
         deviation_sum = 0
-        
         for data_point in test_data:
             sim_result = simulator.simulate_test(self, data_point)
-            deviation_sum += abs(sim_result  - data_point[dependent_test_variable])
-        
-        self.deviation = deviation_sum/test_data_size
+            deviation_sum += (sim_result  - data_point[dependent_test_variable])**2
+        self.deviation = deviation_sum**0.5#/test_data_size
 
         
     # Comparisson functions.

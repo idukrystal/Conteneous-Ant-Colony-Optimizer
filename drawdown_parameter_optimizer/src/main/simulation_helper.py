@@ -74,7 +74,26 @@ class SimulationHelper:
                 solution.deviation
             )
 
-    def update_archive(self, new_solution):
+    def show_final_stats(self):
+        # calculate variance for each parameter
+        vars = {}
+        best_solution = self.solution_archive[0]
+        for parameter in best_solution.parameters:
+            vars[f'{parameter}({best_solution.parameters[parameter]})'] = get_variance(
+                best_solution.parameters[parameter],
+                [solution.parameters[parameter] for solution in self.solution_archive]
+            )
+        vars[f"misfit({best_solution.deviation})"] = get_variance(
+            best_solution.deviation,
+    [ solution.deviation for solution in self.solution_archive])
+        for var in vars:
+            print(f"{var}: {vars[var]}")
+        
+    def update_archive(self, new_solutions):
+        for solution in new_solutions:
+            self.update_one(solution)
+
+    def update_one(self, new_solution):
         """
         Adds new_solution to archive if its better than any
         of the current ones then  removes the worst solution
@@ -133,13 +152,18 @@ def calculate_sd(x, values):
     """
     sum = 0
 
-    found = False
-
     for value in values:
-        if value == x and not found:
-            found = True
-            continue
         sum += abs(value - x)
 
     # e_value controls convengence speed
     return e_value*(sum/(solution_archive_size - 1))
+
+
+
+def get_variance(x, values):
+    sum = 0
+
+    for value in values:
+        sum += (x - value)**2
+
+    return sum/(len(values) - 1)
